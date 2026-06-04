@@ -25,7 +25,7 @@ class Admin {
 		$this->register_scripts();
 		( new Ajax() )->register();
 
-		return sprintf( '<ul class="more-plugins">%s</ul>', $this->get_content() );
+		return sprintf( '<ul class="pluginate">%s</ul>', $this->get_content() );
 	}
 
 	/**
@@ -65,16 +65,16 @@ class Admin {
 
 		switch ( $label ) {
 			case 'Activate':
-				$button_class = 'button-primary more-plugins-activate';
+				$button_class = 'button-primary pluginate-activate';
 				break;
 
 			case 'Installed':
-				$button_class = 'button-secondary more-plugins-installed';
+				$button_class = 'button-secondary pluginate-installed';
 				break;
 
 			case 'Install Plugin':
 			default:
-				$button_class = 'button more-plugins-install';
+				$button_class = 'button pluginate-install';
 				break;
 		}
 
@@ -104,15 +104,15 @@ class Admin {
 			$this->get_plugins(),
 			function ( $carry, $plugin ) {
 				$carry .= sprintf(
-					'<li class="more-plugins-list-item">
-						<div class="more-plugins-list-item-info-wrapper">
+					'<li class="pluginate-list-item">
+						<div class="pluginate-list-item-info-wrapper">
 							<img src="%1$s" alt="%2$s"/>
 							<div>
 								<h2>%2$s</h2>
 								<p>%3$s</p>
 							</div>
 						</div>
-						<div class="more-plugins-list-item-action-wrapper">
+						<div class="pluginate-list-item-action-wrapper">
 							<a
 								href="#"
 								rel="noopener noreferrer"
