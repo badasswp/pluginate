@@ -15,16 +15,26 @@ namespace Pluginate;
  */
 class Admin {
 	/**
+	 * Initialize the Admin class.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
+	public static function init(): void {
+		( new Ajax() )->register();
+
+		add_action( 'admin_enqueue_scripts', [ self::class, 'register_scripts' ] );
+	}
+
+	/**
 	 * Get Plugin Page.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
-	public function run(): string {
-		$this->register_scripts();
-		( new Ajax() )->register();
-
+	public function get_options_page(): string {
 		return sprintf( '<ul class="pluginate">%s</ul>', $this->get_content() );
 	}
 
@@ -145,7 +155,7 @@ class Admin {
 	 *
 	 * @return void
 	 */
-	public function register_scripts(): void {
+	public static function register_scripts(): void {
 		$screen = get_current_screen();
 
 		// Bail out, if not plugin Admin page.
