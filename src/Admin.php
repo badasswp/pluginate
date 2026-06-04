@@ -37,7 +37,7 @@ class Admin {
 	 * @return string
 	 */
 	public function get_image_url( $plugin ): string {
-		return plugins_url( '../assets/plugins/' . ( $plugin['slug'] ?? 'empty' ) . '.webp', __DIR__ );
+		return plugins_url( '/assets/' . ( $plugin['slug'] ?? 'empty' ) . '.webp', __DIR__ );
 	}
 
 	/**
