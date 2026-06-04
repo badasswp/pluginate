@@ -15,15 +15,6 @@ namespace Pluginate;
  */
 class Ajax {
 	/**
-	 * Register Singleton.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return static
-	 */
-	public static $instance;
-
-	/**
 	 * Bind to WP.
 	 *
 	 * @since 1.0.0
@@ -90,22 +81,5 @@ class Ajax {
 		$response = Installer::deactivate_plugin( $_POST['file'] ?? '' );
 
 		wp_die( wp_json_encode( $response ) );
-	}
-
-	/**
-	 * Register Singleton.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return static
-	 */
-	public static function get_instance() {
-		$class = get_called_class();
-
-		if ( ! isset( $class::$instance ) ) {
-			$class::$instance = new $class();
-		}
-
-		return $class::$instance;
 	}
 }
