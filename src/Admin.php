@@ -21,8 +21,9 @@ class Admin {
 	 *
 	 * @return string
 	 */
-	public function get_markup(): string {
-		( new Admin() )->register();
+	public function run(): string {
+		$this->register_scripts();
+		( new Ajax() )->register();
 
 		return sprintf( '<ul class="more-plugins">%s</ul>', $this->get_content() );
 	}
