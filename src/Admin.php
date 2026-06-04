@@ -14,6 +14,26 @@ namespace Pluginate;
  * Admin class.
  */
 class Admin {
+	/*
+	 * Plugin Slug.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var string
+	 */
+	public string $slug;
+
+	/**
+	 * Constructor.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string
+	 */
+	public function __construct( $slug = '' ) {
+		$this->slug = $slug;
+	}
+
 	/**
 	 * Initialize the Admin class.
 	 *
@@ -21,20 +41,20 @@ class Admin {
 	 *
 	 * @return void
 	 */
-	public static function init(): void {
+	public function init(): void {
 		( new Ajax() )->register();
 
-		add_action( 'admin_enqueue_scripts', [ self::class, 'register_scripts' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'register_scripts' ] );
 	}
 
 	/**
-	 * Get Plugin Page.
+	 * Get More Plugins.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
-	public function get_options_page(): string {
+	public function get_more_plugins(): string {
 		return sprintf( '<ul class="pluginate">%s</ul>', $this->get_content() );
 	}
 
@@ -155,11 +175,11 @@ class Admin {
 	 *
 	 * @return void
 	 */
-	public static function register_scripts(): void {
+	public function register_scripts(): void {
 		$screen = get_current_screen();
 
 		// Bail out, if not plugin Admin page.
-		if ( ! is_object( $screen ) || ! str_contains( $screen->id, 'ai-plus-block-editor' ) ) {
+		if ( ! is_object( $screen ) || ( isset( $this->slug ) && ! str_contains( $screen->id, $this->slug ) ) ) {
 			return;
 		}
 
