@@ -5,7 +5,7 @@
 		 * Handles the installation of WordPress plugins via AJAX.
 		 *
 		 * This jQuery function is triggered on the click event of elements
-		 * with the class 'more-plugins-install'. It sends an AJAX request to the server
+		 * with the class 'pluginate-install'. It sends an AJAX request to the server
 		 * to install the specified plugin and updates the button's text and class
 		 * on success.
 		 *
@@ -13,7 +13,7 @@
 		 */
 		jQuery( document ).on(
 			'click',
-			'.more-plugins-install',
+			'.pluginate-install',
 			function ( e ) {
 				e.preventDefault();
 				const button = jQuery( this );
@@ -35,14 +35,22 @@
 					},
 					success( response ) {
 						button
-							.removeClass( 'button more-plugins-install' )
-							.addClass( 'button-primary more-plugins-activate' );
+							.removeClass( 'button pluginate-install' )
+							.addClass( 'button-primary pluginate-activate' );
 						button.text( 'Activate' );
 						button.attr( 'aria-disabled', 'false' );
 						button.css( 'pointer-events', 'auto' );
 						button.css( 'opacity', '1' );
 					},
 					error( xhr, status, error ) {
+						console.error(
+							{
+								slug: button.attr( 'data-slug' ),
+								file: button.attr( 'data-file' ),
+								action: 'pluginate_install_plugin',
+								nonce: ajax_pluginate.nonce,
+							}
+						);
 						console.error( xhr.responseText, status, error );
 					},
 				} );
@@ -53,7 +61,7 @@
 		 * Handles the activation of WordPress plugins via AJAX.
 		 *
 		 * This jQuery function is triggered on the click event of elements
-		 * with the class 'more-plugins-activate'. It sends an AJAX request to the server
+		 * with the class 'pluginate-activate'. It sends an AJAX request to the server
 		 * to activate the specified plugin and updates the button's text and class
 		 * on success.
 		 *
@@ -61,7 +69,7 @@
 		 */
 		jQuery( document ).on(
 			'click',
-			'.more-plugins-activate',
+			'.pluginate-activate',
 			function ( e ) {
 				e.preventDefault();
 				const button = jQuery( this );
